@@ -19,10 +19,21 @@ class PeminjamanView extends GetView<PeminjamanController> {
               itemCount: state!.length,
               itemBuilder: (context, index) {
                 DataPinjam dataPinjam = state[index];
-                return ListTile(
-                  title: Text("${dataPinjam.book?.judul}"),
-                  subtitle: Text(
-                      "Penulis: ${dataPinjam.book?.penulis}\nPenerbit: ${dataPinjam.book?.penerbit}\nTahun Terbit: ${dataPinjam.book?.tahunTerbit}\nTanggal Pinjam:  ${dataPinjam.tanggalPinjam}\nTanggal Kembali: ${dataPinjam.tanggalKembali}"),
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color:
+                            Colors.grey), // Atur warna garis sesuai kebutuhan
+                    borderRadius: BorderRadius.circular(
+                        8.0), // Atur sudut border sesuai kebutuhan
+                  ),
+                  padding: EdgeInsets.all(8.0), // Atur padding sesuai kebutuhan
+                  child: ListTile(
+                    title: Text("${dataPinjam.book?.judul}"),
+                    subtitle: Text(
+                        "${dataPinjam.book?.penulis}\n\nTanggal Pinjam:  ${dataPinjam.tanggalPinjam}\nTanggal Kembali: ${dataPinjam.tanggalKembali}"),
+                    trailing: Text("${dataPinjam.status}"),
+                  ),
                 );
               },
               separatorBuilder: (context, index) => Divider(),
