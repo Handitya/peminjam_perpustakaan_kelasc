@@ -5,7 +5,8 @@ description: A new Flutter project.
 environment: 
   sdk: '>=3.0.5 <4.0.0'
 
-dependencies: 
+dependencies:
+  date_time_picker: ^2.1.0
   cupertino_icons: ^1.0.2
   get: 4.6.5
   dio: 5.4.0
