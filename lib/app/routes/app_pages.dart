@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/Setting/bindings/setting_binding.dart';
+import '../modules/Setting/views/setting_view.dart';
 import '../modules/add_peminjaman/bindings/add_peminjaman_binding.dart';
 import '../modules/add_peminjaman/views/add_peminjaman_view.dart';
 import '../modules/book/bindings/book_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.ADD_PEMINJAMAN,
       page: () => const AddPeminjamanView(),
       binding: AddPeminjamanBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTING,
+      page: () => const SettingView(),
+      binding: SettingBinding(),
     ),
   ];
 }
