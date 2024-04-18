@@ -30,7 +30,7 @@ class PeminjamanController extends GetxController
     change(null, status: RxStatus.loading());
     try {
       final response = await ApiProvider.instance()
-          .get(Endpoint.pinjam + "/${StorageProvider.read(StorageKey.idUser)}");
+          .get(Endpoint.pinjam + "/${StorageProvider.read(StorageKey.UID)}");
       if (response.statusCode == 200) {
         final ResponsePinjam responsePinjam =
             ResponsePinjam.fromJson(response.data);

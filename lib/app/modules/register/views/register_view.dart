@@ -113,7 +113,7 @@ class RegisterView extends GetView<RegisterController> {
                       ? const CircularProgressIndicator()
                       : ElevatedButton(
                     onPressed: () {
-                      controller.register();
+                      controller.add();
                     },
                     style: ElevatedButton.styleFrom(
                       primary: const Color(0xFF28C3E5),

@@ -6,6 +6,12 @@ import '../../../data/provider/api_provider.dart';
 
 class BookController extends GetxController with StateMixin<List<DataBook>> {
   final count = 0.obs;
+  var tabIndex = 1.obs;
+
+  void changeTabIndex(int index) {
+    tabIndex.value = index;
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -50,6 +56,5 @@ class BookController extends GetxController with StateMixin<List<DataBook>> {
       change(null, status: RxStatus.error(e.toString()));
     }
   }
-
   void increment() => count.value++;
 }
