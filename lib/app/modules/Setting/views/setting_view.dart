@@ -19,14 +19,19 @@ class SettingView extends GetView<SettingController> {
         child: Column(
           children: [
             Container(
-        margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
               child: ElevatedButton(
                 onPressed: () {
                   StorageProvider.write(StorageKey.status, "");
                   Get.snackbar("SUCCESS", "Berhasil Logout!", backgroundColor: Colors.green);
                   Get.toNamed(Routes.LOGIN);
-                } ,
-                    child: Text("LOGOUT")),
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // Ubah warna latar belakang menjadi merah
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                ),
+                child: Text("LOGOUT", style: TextStyle(color: Colors.white, fontSize: 18)), // Ubah warna teks menjadi putih untuk kontras yang baik
+              ),
             ),
           ],
         ),

@@ -71,7 +71,7 @@ class DataBook {
         json['kategori'] != null ? Kategori.fromJson(json['kategori']) : null;
   }
 
-  int? id;
+  String? id;
   String? kategoriId;
   String? judul;
   String? penulis;
