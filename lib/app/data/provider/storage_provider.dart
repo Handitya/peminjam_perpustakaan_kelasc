@@ -20,6 +20,7 @@ class StorageProvider {
 
 class StorageKey {
   static const String status = "status";
+  static const String username = "username";
   static const String UID = "UID";
   static const String role= "role";
 }

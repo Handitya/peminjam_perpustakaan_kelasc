@@ -1,124 +1,106 @@
-/// status : 200
-/// message : "success"
-/// data : [{"id":1,"kategori_id":1,"judul":"Belajar mengenal angka","penulis":"kusnaidi","penerbit":"PT alangka","tahun_terbit":2024,"created_at":"2024-01-09T05:43:09.000000Z","updated_at":"2024-01-09T05:43:09.000000Z","kategori":{"id":1,"nama":"umum"}}]
+class ResponseBook {
+  int? status;
+  String? message;
+  List<DataBook>? data;
 
-class ResponsesBook {
-  ResponsesBook({
-    this.status,
-    this.message,
-    this.data,
-  });
+  ResponseBook({this.status, this.message, this.data});
 
-  ResponsesBook.fromJson(dynamic json) {
+  ResponseBook.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
-        data?.add(DataBook.fromJson(v));
+        data!.add(DataBook.fromJson(v));
       });
     }
   }
 
-  int? status;
-  String? message;
-  List<DataBook>? data;
-
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['status'] = status;
-    map['message'] = message;
-    if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    return map;
+    return data;
   }
 }
 
-/// id : 1
-/// kategori_id : 1
-/// judul : "Belajar mengenal angka"
-/// penulis : "kusnaidi"
-/// penerbit : "PT alangka"
-/// tahun_terbit : 2024
-/// created_at : "2024-01-09T05:43:09.000000Z"
-/// updated_at : "2024-01-09T05:43:09.000000Z"
-/// kategori : {"id":1,"nama":"umum"}
-
 class DataBook {
+  int? id;
+  int? kategoriId; // Ubah tipe data dari String? menjadi int?
+  String? judul;
+  String? penulis;
+  String? penerbit;
+  String? gambar;
+  int? tahunTerbit; // Ubah tipe data dari String? menjadi int?
+  String? createdAt;
+  String? updatedAt;
+  Kategori? kategori;
+
   DataBook({
     this.id,
     this.kategoriId,
     this.judul,
     this.penulis,
     this.penerbit,
+    this.gambar,
     this.tahunTerbit,
     this.createdAt,
     this.updatedAt,
     this.kategori,
   });
 
-  DataBook.fromJson(dynamic json) {
+  DataBook.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     kategoriId = json['kategori_id'];
     judul = json['judul'];
     penulis = json['penulis'];
     penerbit = json['penerbit'];
+    gambar = json['gambar'];
     tahunTerbit = json['tahun_terbit'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    kategori =
-        json['kategori'] != null ? Kategori.fromJson(json['kategori']) : null;
+    kategori = json['kategori'] != null ? Kategori.fromJson(json['kategori']) : null;
   }
 
-  String? id;
-  String? kategoriId;
-  String? judul;
-  String? penulis;
-  String? penerbit;
-  String? tahunTerbit;
-  String? createdAt;
-  String? updatedAt;
-  Kategori? kategori;
-
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['kategori_id'] = kategoriId;
-    map['judul'] = judul;
-    map['penulis'] = penulis;
-    map['penerbit'] = penerbit;
-    map['tahun_terbit'] = tahunTerbit;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
-    if (kategori != null) {
-      map['kategori'] = kategori?.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['kategori_id'] = this.kategoriId;
+    data['judul'] = this.judul;
+    data['penulis'] = this.penulis;
+    data['penerbit'] = this.penerbit;
+    data['gambar'] = this.gambar;
+    data['tahun_terbit'] = this.tahunTerbit;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.kategori != null) {
+      data['kategori'] = this.kategori!.toJson();
     }
-    return map;
+    return data;
   }
 }
 
-/// id : 1
-/// nama : "umum"
-
 class Kategori {
+  int? id;
+  String? nama;
+
   Kategori({
     this.id,
     this.nama,
   });
 
-  Kategori.fromJson(dynamic json) {
+  Kategori.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nama = json['nama'];
   }
 
-  int? id;
-  String? nama;
-
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['nama'] = nama;
-    return map;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['nama'] = this.nama;
+    return data;
   }
 }

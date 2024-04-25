@@ -1,3 +1,6 @@
+
+import 'package:peminjam_perpustakaan_kelasc/app/data/model/response_book.dart';
+
 /// status : 200
 /// message : "success"
 /// data : [{"id":1,"user_id":2,"book_id":1,"tanggal_pinjam":"2024-01-01 00:00:00","tanggal_kembali":"2024-01-10 00:00:00","status":"DIPINJAM","created_at":"2024-01-09T06:09:06.000000Z","updated_at":"2024-01-09T06:09:06.000000Z","user":{"id":2,"username":"said","nama":"said","telp":"085","alamat":"alamat","role":"PEMINJAM","created_at":"2024-01-09T05:36:44.000000Z","updated_at":"2024-01-09T05:36:44.000000Z"},"book":{"id":1,"kategori_id":1,"judul":"Belajar mengenal angka","penulis":"kusnaidi","penerbit":"PT alangka","tahun_terbit":2024,"created_at":"2024-01-09T05:43:09.000000Z","updated_at":"2024-01-09T05:43:09.000000Z"}}]
@@ -6,8 +9,7 @@ class ResponsePinjam {
   ResponsePinjam({
     this.status,
     this.message,
-    this.data,
-  });
+    this.data,});
 
   ResponsePinjam.fromJson(dynamic json) {
     status = json['status'];
@@ -32,6 +34,7 @@ class ResponsePinjam {
     }
     return map;
   }
+
 }
 
 /// id : 1
@@ -56,8 +59,7 @@ class DataPinjam {
     this.createdAt,
     this.updatedAt,
     this.user,
-    this.book,
-  });
+    this.book,});
 
   DataPinjam.fromJson(dynamic json) {
     id = json['id'];
@@ -72,8 +74,8 @@ class DataPinjam {
     book = json['book'] != null ? Book.fromJson(json['book']) : null;
   }
   int? id;
-  String? userId;
-  String? bookId;
+  int? userId;
+  int? bookId;
   String? tanggalPinjam;
   String? tanggalKembali;
   String? status;
@@ -100,6 +102,7 @@ class DataPinjam {
     }
     return map;
   }
+
 }
 
 /// id : 1
@@ -118,43 +121,57 @@ class Book {
     this.judul,
     this.penulis,
     this.penerbit,
+    this.gambar,
     this.tahunTerbit,
     this.createdAt,
     this.updatedAt,
+    this.kategori,
   });
 
-  Book.fromJson(dynamic json) {
-    id = json['id'];
-    kategoriId = json['kategori_id'];
-    judul = json['judul'];
-    penulis = json['penulis'];
-    penerbit = json['penerbit'];
-    tahunTerbit = json['tahun_terbit'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
   int? id;
-  String? kategoriId;
+  int? kategoriId; // Ubah tipe data dari String? menjadi int?
   String? judul;
   String? penulis;
   String? penerbit;
-  String? tahunTerbit;
+  String? gambar;
+  int? tahunTerbit; // Ubah tipe data dari String? menjadi int?
   String? createdAt;
   String? updatedAt;
+  Kategori? kategori;
+
+  factory Book.fromJson(Map<String, dynamic> json) {
+    return Book(
+      id: json['id'],
+      kategoriId: json['kategori_id'],
+      judul: json['judul'],
+      penulis: json['penulis'],
+      penerbit: json['penerbit'],
+      gambar: json['gambar'],
+      tahunTerbit: json['tahun_terbit'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
+      kategori: json['kategori'] != null ? Kategori.fromJson(json['kategori']) : null,
+    );
+  }
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['kategori_id'] = kategoriId;
-    map['judul'] = judul;
-    map['penulis'] = penulis;
-    map['penerbit'] = penerbit;
-    map['tahun_terbit'] = tahunTerbit;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
-    return map;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['kategori_id'] = this.kategoriId;
+    data['judul'] = this.judul;
+    data['penulis'] = this.penulis;
+    data['penerbit'] = this.penerbit;
+    data['gambar'] = this.gambar;
+    data['tahun_terbit'] = this.tahunTerbit;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.kategori != null) {
+      data['kategori'] = this.kategori!.toJson();
+    }
+    return data;
   }
 }
+
 
 /// id : 2
 /// username : "said"
@@ -174,8 +191,7 @@ class User {
     this.alamat,
     this.role,
     this.createdAt,
-    this.updatedAt,
-  });
+    this.updatedAt,});
 
   User.fromJson(dynamic json) {
     id = json['id'];
@@ -208,4 +224,5 @@ class User {
     map['updated_at'] = updatedAt;
     return map;
   }
+
 }
