@@ -2,44 +2,40 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../data/provider/storage_provider.dart';
 import '../../../routes/app_pages.dart';
-import '../controllers/home_admin_controller.dart';
+import '../controllers/settingAdmin_controller.dart';
 
-class HomeAdminView extends GetView<HomeAdminController> {
-  const HomeAdminView({Key? key}) : super(key: key);
+class SettingAdminView extends GetView<SettingAdminController> {
+  const SettingAdminView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TreasureBook'),
+        title: const Text('Setting'),
         centerTitle: true,
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Menyusun widget ke tengah
           children: [
-            Image.asset("assets/home.png"),
-            SizedBox(height: 20),
-            Text(
-              "“Ada lebih banyak harta karun di dalam buku \ndaripada disemua jarahan bajak laut di Pulau \nHarta Karun.”",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10), // Menyesuaikan ukuran tombol
-              ),
-              child: Text(
-                "Pinjaman Admin",
-                style: TextStyle(fontSize: 18), // Menyesuaikan ukuran teks tombol
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+              child: ElevatedButton(
+                onPressed: () {
+                  StorageProvider.write(StorageKey.status, "");
+                  Get.snackbar("SUCCESS", "Berhasil Logout!", backgroundColor: Colors.green);
+                  Get.toNamed(Routes.LOGIN);
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // Ubah warna latar belakang menjadi merah
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                ),
+                child: Text("LOGOUT", style: TextStyle(color: Colors.white, fontSize: 18)), // Ubah warna teks menjadi putih untuk kontras yang baik
               ),
             ),
           ],
         ),
       ),
-
       bottomNavigationBar: Obx(
             () => BottomNavigationBar(
           items: const [
@@ -56,9 +52,9 @@ class HomeAdminView extends GetView<HomeAdminController> {
               label: 'Setting',
             ),
           ],
-          currentIndex: Get.find<HomeAdminController>().tabIndex.value,
+          currentIndex: Get.find<SettingAdminController>().tabIndex.value,
           onTap: (index) {
-            Get.find<HomeAdminController>().changeTabIndex(index);
+            Get.find<SettingAdminController>().changeTabIndex(index);
             switch (index) {
               case 0:
                 Get.offNamed(Routes.HOME_ADMIN);

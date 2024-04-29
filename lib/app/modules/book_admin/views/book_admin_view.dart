@@ -30,7 +30,41 @@ class BookAdminView extends GetView<BookAdminController> {
             );
           },
           separatorBuilder: (context, index) => Divider(),
-        )));
+        )),
+      bottomNavigationBar: Obx(
+            () => BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_circle),
+              label: 'Book',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Setting',
+            ),
+          ],
+          currentIndex: Get.find<BookAdminController>().tabIndex.value,
+          onTap: (index) {
+            Get.find<BookAdminController>().changeTabIndex(index);
+            switch (index) {
+              case 0:
+                Get.offNamed(Routes.HOME_ADMIN);
+                break;
+              case 1:
+                Get.offNamed(Routes.BOOK_ADMIN);
+                break;
+              case 2:
+                Get.offNamed(Routes.SETTING_ADMIN);
+                break;
+            }
+          },
+        ),
+      ),
+    );
   }
 }
 

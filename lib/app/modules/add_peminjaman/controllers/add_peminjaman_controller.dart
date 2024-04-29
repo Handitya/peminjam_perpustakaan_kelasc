@@ -34,17 +34,28 @@ class AddPeminjamanController extends GetxController {
       FocusScope.of(Get.context!).unfocus();
       formKey.currentState?.save();
       if (formKey.currentState!.validate()) {
-        final response =
-            await ApiProvider.instance().post(Endpoint.pinjam, data: {
-          "user_id": int.parse(StorageProvider.read(StorageKey.UID)),
-          "book_id": int.parse(Get.parameters['id'].toString()),
-          "tanggal_pinjam": tanggalPinjamController.text.toString(),
-          "tanggal_kembali": tanggalKembaliController.text.toString()
-        });
-        if (response.statusCode == 201) {
-          Get.back();
+        // Parse tanggal_pinjam and tanggal_kembali to DateTime objects
+        DateTime tanggalPinjam = DateTime.parse(tanggalPinjamController.text);
+        DateTime tanggalKembali = DateTime.parse(tanggalKembaliController.text);
+
+        // Calculate the difference in days between tanggalPinjam and tanggalKembali
+        int differenceInDays = tanggalKembali.difference(tanggalPinjam).inDays;
+
+        // Check if the difference is more than 14 days (2 weeks)
+        if (differenceInDays <= 14) {
+          final response = await ApiProvider.instance().post(Endpoint.pinjam, data: {
+            "user_id": int.parse(StorageProvider.read(StorageKey.UID)),
+            "book_id": int.parse(Get.parameters['id'].toString()),
+            "tanggal_pinjam": tanggalPinjamController.text.toString(),
+            "tanggal_kembali": tanggalKembaliController.text.toString()
+          });
+          if (response.statusCode == 201) {
+            Get.back();
+          } else {
+            Get.snackbar("Sorry", "Simpan Gagal", backgroundColor: Colors.orange);
+          }
         } else {
-          Get.snackbar("Sorry", "Simpan Gagal", backgroundColor: Colors.orange);
+          Get.snackbar("Sorry", "Batas waktu pengembalian maksimal adalah 2 minggu (14 hari)", backgroundColor: Colors.orange);
         }
       }
       loading(false);

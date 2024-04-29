@@ -6,7 +6,12 @@ import '../../../data/constant/endpoint.dart';
 import '../../../data/provider/api_provider.dart';
 
 class BookAdminController extends GetxController  with StateMixin<List<DataBook>>{
-  //TODO: Implement BookAdminController
+  var tabIndex = 1.obs;
+
+  void changeTabIndex(int index) {
+    tabIndex.value = index;
+  }
+
 
   final count = 0.obs;
   @override

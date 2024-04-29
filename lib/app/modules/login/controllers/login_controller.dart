@@ -58,7 +58,7 @@ class LoginController extends GetxController {
           String role = StorageProvider.read(StorageKey.role);
           log("status : $status, role : $role");
           if (status == 'logged') {
-            if (role == 'PETUGAS') {
+            if (role == 'PETUGAS1') {
               Get.offAllNamed(Routes.HOME_ADMIN);
             } else {
               Get.offAllNamed(Routes.HOME);

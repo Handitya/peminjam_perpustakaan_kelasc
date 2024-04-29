@@ -36,7 +36,7 @@ class AddPeminjamanView extends GetView<AddPeminjamanController> {
                   controller: controller.tanggalKembaliController,
                   firstDate: DateTime(2000),
                   lastDate: DateTime(2100),
-                  dateLabelText: 'Tanggal Kembali',
+                  dateLabelText: 'Tanggal Kembali (<= 2 minggu)',
                   dateMask: 'yyyy-MM-dd',
                   onChanged: (val) => print(val),
                   validator: (val) {

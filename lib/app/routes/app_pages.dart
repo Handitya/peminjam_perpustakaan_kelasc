@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/Setting/bindings/setting_binding.dart';
 import '../modules/Setting/views/setting_view.dart';
+import '../modules/Setting_Admin/bindings/settingAdmin_binding.dart';
+import '../modules/Setting_Admin/views/settingAdmin_view.dart';
 import '../modules/add_book/bindings/add_book_binding.dart';
 import '../modules/add_book/views/add_book_view.dart';
 import '../modules/add_peminjaman/bindings/add_peminjaman_binding.dart';
@@ -63,6 +65,11 @@ class AppPages {
       name: _Paths.SETTING,
       page: () => const SettingView(),
       binding: SettingBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTING_ADMIN,
+      page: () => const SettingAdminView(),
+      binding: SettingAdminBinding(),
     ),
     GetPage(
       name: _Paths.HOME_ADMIN,

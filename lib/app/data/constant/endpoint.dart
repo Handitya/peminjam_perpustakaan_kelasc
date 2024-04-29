@@ -1,6 +1,6 @@
 class Endpoint {
   static const String baseUrlApi =
-      "http://192.168.1.23:8000/api/v1/user/";
+      "http://192.168.5.144:8000/api/v1/user/";
 
   static const String register = "${baseUrlApi}register";
   static const String login = "${baseUrlApi}login";
@@ -10,7 +10,7 @@ class Endpoint {
   static const String UID = "${baseUrlApi}UID";
 }
 class Endpoint_admin{
-  static const String baseUrlApi = "https://192.168.6.27:8000//api/v1/petugas/";
+  static const String baseUrlApi = "https://192.168.5.144:8000//api/v1/petugas/";
 
 
   static const String login_admin = "${baseUrlApi}login";
